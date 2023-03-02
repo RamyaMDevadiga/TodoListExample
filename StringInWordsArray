@@ -1,0 +1,60 @@
+// const words = ['cat', 'baby'];
+
+// const string1 = 'cthkjlaa';
+
+const words = ["cat", "baby", "dog", "bird", "car", "ax"];
+const str = "tcabnihjs"; // return cat
+const string2 = "tbcanihjs";
+const string3 = "baykkjl";
+const string4 = "bbaylkkj";  // return baby
+const string5 = "ccc";
+const string6 = "breadmaking";
+const string7 = "tcabnihjsbbabylkkj"; //return cat and baby
+const string8 = "tcbnihjsbbabylkkj"; // return either cat or baby
+
+const getLetterCount = (str) => {
+  const countInString = {};
+
+  for (let i of str) {
+    if (countInString[i]) {
+      countInString[i] += 1;
+    } else {
+      countInString[i] = 1;
+    }
+  }
+
+  return countInString;
+};
+
+const stringchecker = (words, str) => {
+  const letterCount = getLetterCount(str);
+  const result = [];
+
+  for (let word of words) {
+    const count = getLetterCount(word);
+    let available = true;
+    for (let letter in count) {
+      if (letterCount[letter]) {
+        letterCount[letter] -= 1;
+      } else {
+        available = false;
+        break;
+      }
+    }
+    if (available) {
+      result.push(word);
+    }
+  }
+
+  return result;
+};
+
+console.log("str",stringchecker(words, str));
+console.log("string2",stringchecker(words, string2));
+console.log("string3",stringchecker(words, string3));
+console.log("string4",stringchecker(words, string4));
+console.log("string5",stringchecker(words, string5));
+console.log("string6",stringchecker(words, string6));
+console.log("string7",stringchecker(words, string7));
+console.log("str",stringchecker(words, str));
+console.log("string8",stringchecker(words, string8));
